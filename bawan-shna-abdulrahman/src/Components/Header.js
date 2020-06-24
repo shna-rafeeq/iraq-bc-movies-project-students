@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { value: "" };
     this.baseState = this.state;
 
