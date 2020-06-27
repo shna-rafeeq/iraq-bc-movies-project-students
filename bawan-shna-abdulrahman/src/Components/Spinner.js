@@ -7,7 +7,7 @@ export default function Spinners(props) {
       {!props.isSpinnerHidden && (
         <Spinner
           animation="border"
-          variant="info"
+          variant="warning"
           size="sm"
           style={{ marginLeft: "8px" }}
         />
