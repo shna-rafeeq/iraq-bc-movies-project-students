@@ -7,7 +7,7 @@ export default function Header(props) {
     <div>
       <Navbar bg="dark" expand="lg">
         <Navbar.Brand href="#home" style={{ color: "white" }}>
-          My first React App
+          React App
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-Navbar-nav" />
         <Navbar.Collapse id="basic-Navbar-nav">
@@ -16,13 +16,11 @@ export default function Header(props) {
               Home
             </Nav.Link>
           </Nav>
-
           <Search
-            onSubmit={props.onSubmit}
-            onChange={props.onChange}
-            isSpinnerHidden={props.isSpinnerHidden}
-            categorie={props.categorie}
-            setCategorie={props.setCategorie}
+            handleQuery={props.handleQuery}
+            handleMovies={props.handleMovies}
+            isLoading={props.isLoading}
+            setIsLoading={props.setIsLoading}
           />
         </Navbar.Collapse>
       </Navbar>

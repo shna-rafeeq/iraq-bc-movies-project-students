@@ -1,24 +1,69 @@
-import React from "react";
-import DropdownCategories from "./DropdownCategories";
+import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import Spinners from "./Spinner";
+import DropdownCategories from "./DropdownCategories";
+import { constructUrl } from "./Api";
 
 export default function Search(props) {
+  const [category, setCategory] = useState({});
+
+  const changeCategory = (category) => {
+    console.log(category);
+    props.setIsLoading(true);
+    setCategory(category);
+  };
+  const [query, setQuery] = useState("");
+  const onChange = (e) => {
+    setQuery(e.target.value);
+  };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    props.setIsLoading(true);
+    props.handleQuery(query);
+  };
+
+  useEffect(fetchMovies, [props.isLoading, category]);
+  function fetchMovies() {
+    if (!props.isLoading) return;
+    let SEARCH_URL;
+    if (query !== "") {
+      SEARCH_URL = constructUrl("search/movie", query);
+    } else {
+      SEARCH_URL = constructUrl("movie/popular");
+    }
+    fetch(SEARCH_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.results !== undefined) {
+          let movies = data.results;
+          console.log(movies);
+          if (category.id) {
+            movies = movies.filter((movie) =>
+              movie.genre_ids.includes(category.id)
+            );
+            console.log(movies);
+          }
+          props.handleMovies(movies);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
-    <Form inline onSubmit={props.onSubmit}>
-      <DropdownCategories
-        categorie={props.categorie}
-        setCategorie={props.setCategorie}
-      />
+    <Form inline onSubmit={onSubmit}>
+      <DropdownCategories category={category} setCategory={changeCategory} />
       <FormControl
         type="text"
         placeholder="Search"
         className="mr-sm-2"
-        onChange={props.onChange}
+        onChange={onChange}
       />
       <Button variant="outline-light" type="submit">
         Search
-        <Spinners isSpinnerHidden={props.isSpinnerHidden} />
+        <span>
+          <Spinners isLoading={props.isLoading} />
+        </span>
       </Button>
     </Form>
   );
