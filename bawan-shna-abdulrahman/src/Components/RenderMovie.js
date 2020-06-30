@@ -9,10 +9,21 @@ export default function RenderMovie(props) {
 
   return (
     <div style={{ marginTop: "50px" }}>
-      <Card style={{ width: "300px", margin: "10px" }}>
+      <Card
+        title={props.title}
+        style={{ width: "300px", margin: "10px" }}
+        onClick={() => {
+          props.setMovieId(props.id);
+          console.log(props.movieId);
+        }}
+      >
         <Card.Img variant="top" src={props.src} />
+
         <Card.Body>
-          <Card.Title>{props.title}</Card.Title>
+          <Card.Title>
+            {`${props.title}`.substr(0, 25)}
+            {props.title.length >= 25 ? "..." : ""}
+          </Card.Title>
 
           <Button
             variant="warning"

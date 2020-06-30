@@ -13,8 +13,11 @@ export default function MoviesGrid(props) {
             <RenderMovie
               overview={movie.overview}
               src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path}
+              id={movie.id}
               key={movie.id}
               title={movie.title}
+              setMovieId={props.setMovieId}
+              movieId={props.movieId}
             />
           ))}
       </Row>

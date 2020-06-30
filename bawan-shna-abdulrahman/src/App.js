@@ -4,12 +4,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import Header from "./Components/Header";
 import Main from "./Components/Main";
 import Footer from "./Components/Footer";
+import MoviePage from "./Components/MoviePage";
 import "react-simple-flex-grid/lib/main.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
+  const [movieId, setMovieId] = useState("");
 
   const handleQuery = (query) => {
     setQuery(query);
@@ -29,12 +31,19 @@ function App() {
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
-        <Main
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          movies={movies}
-          query={query}
-        />
+        {movieId != "" && (
+          <MoviePage movieId={movieId} setMovieId={setMovieId} o />
+        )}
+        {movieId == "" && (
+          <Main
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            movies={movies}
+            query={query}
+            setMovieId={setMovieId}
+            movieId={movieId}
+          />
+        )}
       </div>
       <Footer />
     </div>
