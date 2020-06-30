@@ -16,6 +16,7 @@ export default function MoviePage(props) {
           props.history.push("/");
         } else {
           setMovieItem(data);
+          console.log(props);
         }
       })
       .catch((e) => {

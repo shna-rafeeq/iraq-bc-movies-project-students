@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function RenderMovie(props) {
   return (
     <Link
-      to={`/movie/${props.id}`}
+      to={`/movie/${props.title}/${props.id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
       <div style={{ marginTop: "50px" }}>

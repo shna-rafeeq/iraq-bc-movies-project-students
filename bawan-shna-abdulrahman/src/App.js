@@ -44,7 +44,7 @@ export default function App() {
               movieId={movieId}
             />
           </Route>
-          <Route path="/movie/:id" component={MoviePage} />
+          <Route path="/movie/:title/:id" component={MoviePage} />
         </div>
         <Footer />
       </div>
