@@ -12,7 +12,7 @@ export default function MoviePage(props) {
   let MOVIE_ID = props.match.params.id;
   const [movieItem, setMovieItem] = useState({});
   const [trailers, setTrailers] = useState([]);
-  // const [genres, setGenres] = useState([]);
+  const [actors, setActors] = useState([]);
 
   // fetch each card
   useEffect(() => {
@@ -41,6 +41,20 @@ export default function MoviePage(props) {
           tmp.push(`https://www.youtube.com/watch?v=${trailer.key}`);
         });
         setTrailers(tmp);
+      });
+  }, [MOVIE_ID]);
+
+  //fetch actors
+  useEffect(() => {
+    SEARCH_URL = constructUrl(`movie/${MOVIE_ID}/credits`);
+    fetch(SEARCH_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        let actors = [];
+        data.cast.map((actor) => {
+          actors.push(actor.name);
+        });
+        setActors(actors);
       });
   }, [MOVIE_ID]);
 
@@ -84,6 +98,9 @@ export default function MoviePage(props) {
             url={v}
           />
         );
+      })}
+      {actors.map((v) => {
+        return <p style={{ marginLeft: "10px" }}>{v}</p>;
       })}
 
       {movieItem.genres
