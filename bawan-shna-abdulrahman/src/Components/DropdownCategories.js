@@ -15,7 +15,6 @@ export default function DropdownCategories(props) {
     fetch(SEARCH_URL_CATEGORIES)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.genres !== undefined)
           setCategories([{ id: 0, name: "All" }, ...data.genres]);
       })

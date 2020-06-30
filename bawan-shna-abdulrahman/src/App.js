@@ -6,8 +6,9 @@ import Main from "./Components/Main";
 import Footer from "./Components/Footer";
 import MoviePage from "./Components/MoviePage";
 import "react-simple-flex-grid/lib/main.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function App() {
+export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -23,30 +24,30 @@ function App() {
   };
 
   return (
-    <div className="page-container">
-      <div className="content-wrap">
-        <Header
-          handleQuery={handleQuery}
-          handleMovies={handleMovies}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-        />
-        {movieId != "" && (
-          <MoviePage movieId={movieId} setMovieId={setMovieId} o />
-        )}
-        {movieId == "" && (
-          <Main
+    <Router>
+      <div className="page-container">
+        <div className="content-wrap">
+          <Header
+            handleQuery={handleQuery}
+            handleMovies={handleMovies}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
-            movies={movies}
-            query={query}
-            setMovieId={setMovieId}
-            movieId={movieId}
           />
-        )}
+
+          <Route exact path="/">
+            <Main
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              movies={movies}
+              query={query}
+              setMovieId={setMovieId}
+              movieId={movieId}
+            />
+          </Route>
+          <Route path="/movie/:id" component={MoviePage} />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Router>
   );
 }
-export default App;

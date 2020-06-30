@@ -34,15 +34,13 @@ export default function Search(props) {
     fetch(SEARCH_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.results !== undefined) {
           let movies = data.results;
-          console.log(movies);
+
           if (category.id) {
             movies = movies.filter((movie) =>
               movie.genre_ids.includes(category.id)
             );
-            console.log(movies);
           }
           props.handleMovies(movies);
         }

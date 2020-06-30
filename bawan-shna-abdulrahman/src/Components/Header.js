@@ -1,20 +1,28 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 
 export default function Header(props) {
   return (
     <div>
       <Navbar bg="dark" expand="lg">
-        <Navbar.Brand href="./MovieGrid.js" style={{ color: "white" }}>
-          React App
-        </Navbar.Brand>
+        <Link
+          to="/"
+          style={{
+            marginRight: "20px",
+            color: "white",
+            textDecoration: "none",
+          }}
+        >
+          React app
+        </Link>
         <Navbar.Toggle aria-controls="basic-Navbar-nav" />
         <Navbar.Collapse id="basic-Navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="./MovieGrid.js" style={{ color: "white" }}>
+            <Link to="/" style={{ color: "white", textDecoration: "none" }}>
               Home
-            </Nav.Link>
+            </Link>
           </Nav>
           <Search
             handleQuery={props.handleQuery}

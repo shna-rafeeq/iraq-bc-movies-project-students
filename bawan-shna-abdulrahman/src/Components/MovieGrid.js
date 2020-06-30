@@ -16,8 +16,8 @@ export default function MoviesGrid(props) {
               id={movie.id}
               key={movie.id}
               title={movie.title}
-              setMovieId={props.setMovieId}
-              movieId={props.movieId}
+              popularity={movie.popularity}
+              release_date={movie.release_date}
             />
           ))}
       </Row>
