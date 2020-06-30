@@ -1,7 +1,6 @@
 import React from "react";
 import RenderMovie from "./RenderMovie";
-import { Row } from "react-simple-flex-grid";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 export default function MoviesGrid(props) {
   const movies = props.movies;
@@ -13,6 +12,7 @@ export default function MoviesGrid(props) {
             <RenderMovie
               overview={movie.overview}
               src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path}
+              moviebackdrop={movie.backdrop_path}
               id={movie.id}
               key={movie.id}
               title={movie.title}

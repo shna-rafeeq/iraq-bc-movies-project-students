@@ -38,13 +38,15 @@ export default function Search(props) {
           let movies = data.results;
 
           if (category.id) {
-            movies = movies.filter((movie) =>
-              movie.genre_ids.includes(category.id)
-            );
+            movies = movies.filter((movie) => {
+              movie.genre_ids.includes(category.id);
+            });
           }
+
           props.handleMovies(movies);
         }
       })
+
       .catch((err) => console.log(err));
   }
 
