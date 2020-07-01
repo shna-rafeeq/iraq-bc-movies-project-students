@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { constructUrl } from "./Api";
 import { Link } from "react-router-dom";
-import { Card, Badge, Carousel } from "react-bootstrap";
+import {
+  Card,
+  Badge,
+  Carousel,
+  Row,
+  Col,
+  Image,
+  Button,
+} from "react-bootstrap";
 import ReactPlayer from "react-player";
 
 export default function MoviePage(props) {
@@ -52,87 +60,93 @@ export default function MoviePage(props) {
     fetch(SEARCH_URL)
       .then((res) => res.json())
       .then((data) => {
-        let actors = [];
-        data.cast.map((actor) => {
-          actors.push(actor.name);
-        });
-        setActors(actors);
+        setActors(data.cast);
       });
   }, [MOVIE_ID]);
 
   return (
     <>
-      <div
-        style={{
-          marginTop: "50px",
-        }}
-      >
-        <Card
-          className="shadow-box"
+      <Row>
+        <div
           style={{
-            width: "300px",
-            margin: "20px",
-          }}
-        >
-          <Card.Img
-            variant="top"
-            src={
+            backgroundImage: `url(${
               movieItem.backdrop_path !== null
                 ? "https://image.tmdb.org/t/p/original" +
                   movieItem.backdrop_path
                 : nullPhoto
-            }
-          />
-          <Card.Body>
-            <Card.Title align="middle">{movieItem.original_title}</Card.Title>
-            <Badge variant="warning" style={{ marginRight: "95px" }}>
-              Rating: {movieItem.vote_average}
-            </Badge>
-            <Badge variant="primary">{movieItem.release_date}</Badge>
-          </Card.Body>
-        </Card>
-      </div>
-      <Carousel>
-        {trailers.map((v, i) => {
-          return (
-            <Carousel.Item>
-              <ReactPlayer width="100%" key={`haha-${i}`} url={v} />
-            </Carousel.Item>
-          );
-        })}
-      </Carousel>
-
-      {actors.map((v) => {
-        return <p style={{ marginLeft: "10px" }}>{v}</p>;
-      })}
-
-      {movieItem.genres
-        ? movieItem.genres.map((genre) => {
-            return (
-              <Badge
-                style={{ marginRight: "20px", marginLeft: "10px" }}
-                variant="warning"
-              >
-                {genre.name}
-              </Badge>
-            );
-          })
-        : null}
-
-      <Link
-        to="/"
-        style={{
-          marginLeft: "50%",
-          textDecoration: "none",
-          color: "black",
-          padding: "5px",
-          backgroundColor: " #ffc107",
-          borderRadius: "0.25rem",
-          borderColor: "#ffc107",
-        }}
-      >
-        Back
-      </Link>
+            })`,
+            height: "100vh",
+            top: 0,
+            width: "100%",
+            backgroundSize: "cover",
+            position: "absolute",
+            right: 0,
+            left: 0,
+            zIndex: 1,
+          }}
+        ></div>
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            zIndex: 2,
+            background:
+              "linear-gradient(rgba(4, 4, 4, 0.9) 0%, rgba(255, 255, 255, 0) 95%)",
+            top: 0,
+            right: 0,
+            left: 0,
+          }}
+        ></div>
+        <Col lg={12} style={{ zIndex: 200 }}>
+          <select>
+            {actors.map((v) => {
+              return <option>{v.name}</option>;
+            })}
+          </select>
+        </Col>
+        <Col lg={12} style={{ zIndex: 200 }}>
+          {movieItem.genres
+            ? movieItem.genres.map((genre) => {
+                return (
+                  <Badge
+                    style={{ marginRight: "20px", marginLeft: "10px" }}
+                    variant="warning"
+                  >
+                    {genre.name}
+                  </Badge>
+                );
+              })
+            : null}
+        </Col>
+        <Col lg={{ span: 6, offset: 3 }}>
+          <Carousel style={{ zIndex: 3 }}>
+            {trailers.map((v, i) => {
+              return (
+                <Carousel.Item>
+                  <ReactPlayer width="100%" key={`haha-${i}`} url={v} />
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        </Col>
+        <Col lg={12} style={{ zIndex: 200 }}>
+          <Link
+            to="/"
+            style={{
+              marginLeft: "50%",
+              textDecoration: "none",
+              color: "black",
+              padding: "5px",
+              backgroundColor: " #ffc107",
+              borderRadius: "0.25rem",
+              borderColor: "#ffc107",
+            }}
+          >
+            Back
+          </Link>
+        </Col>
+      </Row>
     </>
   );
 }
