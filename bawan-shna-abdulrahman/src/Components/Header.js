@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Header(props) {
   return (
     <div>
-      <Navbar bg="dark" expand="lg">
+      <Navbar bg="dark" expand="lg" style={{ zIndex: 1000 }}>
         <Link
           to="/"
           style={{
