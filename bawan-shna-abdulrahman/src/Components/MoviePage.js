@@ -24,17 +24,13 @@ export default function MoviePage(props) {
   const [trailers, setTrailers] = useState([]);
   const [actors, setActors] = useState([]);
 
-  // fetch each card
+  // fetch each movie
   useEffect(() => {
     SEARCH_URL = constructUrl(`movie/${MOVIE_ID}`);
     fetch(SEARCH_URL)
       .then((res) => res.json())
       .then((data) => {
-        if (data.id == undefined) {
-          props.history.push("/");
-        } else {
-          setMovieItem(data);
-        }
+        setMovieItem(data);
       })
       .catch((e) => {
         props.history.push("/");
@@ -99,11 +95,13 @@ export default function MoviePage(props) {
           }}
         ></div>
         <Col lg={12} style={{ zIndex: 200 }}>
-          <select>
-            {actors.map((v) => {
-              return <option>{v.name}</option>;
-            })}
-          </select>
+          {actors.map((v) => {
+            return (
+              <Link to={`/person/${v.id}`}>
+                <p>{v.name}</p>
+              </Link>
+            );
+          })}
         </Col>
         <Col lg={12} style={{ zIndex: 200 }}>
           {movieItem.genres

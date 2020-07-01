@@ -8,7 +8,7 @@ export default function RenderMovie(props) {
     "https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png";
   return (
     <Link
-      to={`/movie/${props.title}/${props.id}`}
+      to={`/movie/${props.id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
       <div style={{ marginTop: "50px" }}>

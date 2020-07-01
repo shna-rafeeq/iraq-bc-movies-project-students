@@ -5,13 +5,9 @@ import Header from "./Components/Header";
 import Main from "./Components/Main";
 import Footer from "./Components/Footer";
 import MoviePage from "./Components/MoviePage";
+import Info from "./Components/info";
 import "react-simple-flex-grid/lib/main.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 export default function App(props) {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,10 +34,9 @@ export default function App(props) {
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
-          <Route path="/iraq-bc-movies-project-students">
-            <Redirect to="/" />
-          </Route>
-          <Route path="/movie/:title/:id" component={MoviePage} />
+
+          <Route path="/movie/:id" component={MoviePage} />
+          <Route path="/person/:id" component={Info} />
           <Route exact path="/">
             <Main
               isLoading={isLoading}
