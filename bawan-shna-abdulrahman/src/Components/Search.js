@@ -8,7 +8,6 @@ export default function Search(props) {
   const [category, setCategory] = useState({});
 
   const changeCategory = (category) => {
-    console.log(category);
     props.setIsLoading(true);
     setCategory(category);
   };
