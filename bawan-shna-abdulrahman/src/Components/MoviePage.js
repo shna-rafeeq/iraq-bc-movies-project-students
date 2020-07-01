@@ -83,10 +83,10 @@ export default function MoviePage(props) {
           />
           <Card.Body>
             <Card.Title align="middle">{movieItem.original_title}</Card.Title>
-            <Badge variant="primary" style={{ marginRight: "95px" }}>
-              {movieItem.release_date}
+            <Badge variant="warning" style={{ marginRight: "95px" }}>
+              Rating: {movieItem.vote_average}
             </Badge>
-            <Badge variant="warning">Rating: {movieItem.vote_average}</Badge>
+            <Badge variant="primary">{movieItem.release_date}</Badge>
           </Card.Body>
         </Card>
       </div>

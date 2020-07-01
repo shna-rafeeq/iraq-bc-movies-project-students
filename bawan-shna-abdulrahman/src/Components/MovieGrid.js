@@ -11,7 +11,7 @@ export default function MoviesGrid(props) {
           movies.map((movie) => (
             <RenderMovie
               overview={movie.overview}
-              src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path}
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               moviebackdrop={movie.backdrop_path}
               id={movie.id}
               key={movie.id}
