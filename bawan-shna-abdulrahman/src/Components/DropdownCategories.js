@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { constructUrl } from "./Api";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
 export default function DropdownCategories(props) {
   const SEARCH_URL_CATEGORIES = constructUrl("genre/movie/list", "");
