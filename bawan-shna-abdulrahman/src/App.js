@@ -6,7 +6,12 @@ import Main from "./Components/Main";
 import Footer from "./Components/Footer";
 import MoviePage from "./Components/MoviePage";
 import "react-simple-flex-grid/lib/main.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +38,10 @@ export default function App() {
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
-
+          <Route path="/iraq-bc-movies-project-students">
+            <Redirect to="/" />
+          </Route>
+          <Route exact path="/movie/:title/:id" component={MoviePage} />
           <Route exact path="/">
             <Main
               isLoading={isLoading}
@@ -44,7 +52,6 @@ export default function App() {
               movieId={movieId}
             />
           </Route>
-          <Route path="/movie/:title/:id" component={MoviePage} />
         </div>
         <Footer />
       </div>

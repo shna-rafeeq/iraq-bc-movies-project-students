@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { constructUrl } from "./Api";
 import { Link } from "react-router-dom";
-import { Card, Badge } from "react-bootstrap";
+import { Card, Badge, Carousel } from "react-bootstrap";
 import ReactPlayer from "react-player";
 
 export default function MoviePage(props) {
@@ -90,15 +90,16 @@ export default function MoviePage(props) {
           </Card.Body>
         </Card>
       </div>
-      {trailers.map((v, i) => {
-        return (
-          <ReactPlayer
-            style={{ marginTop: "10px", marginLeft: "10px" }}
-            key={`haha-${i}`}
-            url={v}
-          />
-        );
-      })}
+      <Carousel>
+        {trailers.map((v, i) => {
+          return (
+            <Carousel.Item>
+              <ReactPlayer width="100%" key={`haha-${i}`} url={v} />
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
+
       {actors.map((v) => {
         return <p style={{ marginLeft: "10px" }}>{v}</p>;
       })}
