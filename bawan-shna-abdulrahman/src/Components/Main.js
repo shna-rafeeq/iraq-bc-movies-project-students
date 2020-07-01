@@ -3,7 +3,6 @@ import MovieGrid from "./MovieGrid";
 
 export default function Main(props) {
   const movies = props.movies;
-
   return (
     <>
       {movies.length > 0 && (

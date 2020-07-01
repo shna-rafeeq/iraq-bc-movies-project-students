@@ -13,7 +13,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-export default function App() {
+export default function App(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -41,7 +41,7 @@ export default function App() {
           <Route path="/iraq-bc-movies-project-students">
             <Redirect to="/" />
           </Route>
-          <Route exact path="/movie/:title/:id" component={MoviePage} />
+          <Route path="/movie/:title/:id" component={MoviePage} />
           <Route exact path="/">
             <Main
               isLoading={isLoading}

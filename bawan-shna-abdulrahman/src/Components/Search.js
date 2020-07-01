@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import Spinners from "./Spinner";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
 
 export default function Search(props) {
   const [category, setCategory] = useState({});
-
+  const history = useHistory();
+  const match = useRouteMatch({
+    path: "/",
+    strict: true,
+    sensitive: true,
+  });
   const changeCategory = (category) => {
-    console.log(category);
     props.setIsLoading(true);
     setCategory(category);
   };
@@ -36,14 +41,15 @@ export default function Search(props) {
       .then((data) => {
         if (data.results !== undefined) {
           let movies = data.results;
-
           if (category.id) {
             movies = movies.filter((movie) => {
-              movie.genre_ids.includes(category.id);
+              return movie.genre_ids.includes(category.id);
             });
           }
-
           props.handleMovies(movies);
+          if (!match.isExact) {
+            history.push("/");
+          }
         }
       })
 

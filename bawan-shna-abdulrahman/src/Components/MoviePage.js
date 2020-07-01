@@ -9,6 +9,8 @@ export default function MoviePage(props) {
     "https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png";
 
   let SEARCH_URL;
+  // let { id } = useParams();
+  // let MOVIE_ID = id;
   let MOVIE_ID = props.match.params.id;
   const [movieItem, setMovieItem] = useState({});
   const [trailers, setTrailers] = useState([]);
