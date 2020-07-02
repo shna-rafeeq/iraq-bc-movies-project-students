@@ -21,7 +21,7 @@ export default function RenderMovie(props) {
             Overview
           </Button>
 
-          <Modal show={show} onHide={toogle}>
+          <Modal onHide={toogle}>
             <Modal.Header closeButton>
               <Modal.Title>OverView</Modal.Title>
             </Modal.Header>
