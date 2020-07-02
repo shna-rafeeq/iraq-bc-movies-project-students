@@ -6,7 +6,6 @@ import Main from "./Components/Main";
 import Footer from "./Components/Footer";
 import MoviePage from "./Components/MoviePage";
 import Info from "./Components/info";
-import "react-simple-flex-grid/lib/main.css";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 export default function App(props) {
