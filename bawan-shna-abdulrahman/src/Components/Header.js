@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import Search from "./Search";
 
 export default function Header(props) {
+  const { handleQuery, handleMovies, isLoading, setIsLoading } = props;
   return (
     <div>
       <Navbar bg="dark" expand="lg">
@@ -17,10 +18,10 @@ export default function Header(props) {
             </Nav.Link>
           </Nav>
           <Search
-            handleQuery={props.handleQuery}
-            handleMovies={props.handleMovies}
-            isLoading={props.isLoading}
-            setIsLoading={props.setIsLoading}
+            handleQuery={handleQuery}
+            handleMovies={handleMovies}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         </Navbar.Collapse>
       </Navbar>

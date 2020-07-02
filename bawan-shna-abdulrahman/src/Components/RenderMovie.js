@@ -4,8 +4,7 @@ import { Modal, Button, Card, CardTitle, CardText } from "react-bootstrap";
 
 export default function RenderMovie(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  let toogle = () => setShow((prev) => !prev);
 
   return (
     <div style={{ marginTop: "50px" }}>
@@ -16,13 +15,13 @@ export default function RenderMovie(props) {
 
           <Button
             variant="warning"
-            onClick={handleShow}
+            onClick={toogle}
             style={{ marginTop: "10px" }}
           >
             Overview
           </Button>
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={toogle}>
             <Modal.Header closeButton>
               <Modal.Title>OverView</Modal.Title>
             </Modal.Header>
@@ -30,7 +29,7 @@ export default function RenderMovie(props) {
               <p>{props.overview}</p>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="warning" onClick={handleClose}>
+              <Button variant="warning" onClick={toogle}>
                 Close
               </Button>
             </Modal.Footer>
