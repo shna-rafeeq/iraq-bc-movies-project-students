@@ -1,17 +1,25 @@
-import React from "react";
-import { Card, Badge, Modal, Button, toogle } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Badge, Modal, Button } from "react-bootstrap";
 import "./BoxShadow.css";
 import { Link } from "react-router-dom";
 
 export default function RenderMovie(props) {
   const nullPhoto =
     "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
+  const [show, setShow] = useState(false);
+  const toogle = () => {
+    // alert("called");
+    setShow((prevstate) => {
+      return !prevstate;
+    });
+  };
+
   return (
-    <Link
-      to={`/movie/${props.id}`}
-      style={{ textDecoration: "none", color: "black" }}
-    >
-      <div style={{ marginTop: "50px" }}>
+    <div style={{ marginTop: "50px" }}>
+      <Link
+        to={`/movie/${props.id}`}
+        style={{ textDecoration: "none", color: "black" }}
+      >
         <Card
           className="shadow-box"
           style={{
@@ -33,31 +41,26 @@ export default function RenderMovie(props) {
               Popularity:{props.popularity}
             </Badge>
             <Badge variant="primary">{props.release_date}</Badge>
-
-            <Button
-              variant="warning"
-              onClick={toogle}
-              style={{ marginTop: "10px" }}
-            >
-              Overview
-            </Button>
-
-            <Modal onHide={toogle}>
-              <Modal.Header closeButton>
-                <Modal.Title>OverView</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <p>{props.overview}</p>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="warning" onClick={toogle}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
           </Card.Body>
         </Card>
-      </div>
-    </Link>
+      </Link>
+      <Button variant="warning" onClick={toogle} style={{ marginLeft: "35%" }}>
+        Overview
+      </Button>
+
+      <Modal show={show} onHide={toogle}>
+        <Modal.Header closeButton>
+          <Modal.Title>OverView</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{props.overview}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" onClick={toogle}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
