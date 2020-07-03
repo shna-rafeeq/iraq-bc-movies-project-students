@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
+import { Button, Form, FormControl, Spinner } from "react-bootstrap";
 import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
-import Spinners from "./Spinner";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
 
@@ -12,7 +11,6 @@ export default function Search(props) {
   const location = useLocation();
   const parts = location.search.split("&");
   const parts2 = `${parts[0]}`.split("=");
-
   const match = useRouteMatch({
     path: "/",
     strict: true,
@@ -41,16 +39,17 @@ export default function Search(props) {
     }
   };
 
-  useEffect(() => fetchMovies, [category]);
+  useEffect(fetchMovies, [category]);
   useEffect(() => {
     if (location.search != "") {
       fetchMovies(parts2[1]);
       setQueryInput(parts2[1]);
+    } else {
+      fetchMovies();
     }
   }, []);
 
-  function fetchMovies(queryInput) {
-    // if (!props.isLoading) return;
+  function fetchMovies(queryInput = "") {
     let SEARCH_URL;
     if (queryInput !== "") {
       SEARCH_URL = constructUrl("search/movie", queryInput);
@@ -86,7 +85,11 @@ export default function Search(props) {
       <Button variant="outline-light" type="submit">
         Search
         <span>
-          <Spinners isLoading={props.isLoading} />
+          {props.isLoading ? (
+            <Spinner animation="border" variant="warning" size="sm" />
+          ) : (
+            " "
+          )}
         </span>
       </Button>
     </Form>
