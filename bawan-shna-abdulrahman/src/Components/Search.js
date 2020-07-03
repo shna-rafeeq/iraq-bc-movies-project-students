@@ -1,52 +1,75 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
-import Spinners from "./Spinner";
+import { Button, Form, FormControl, Spinner } from "react-bootstrap";
+import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
 
 export default function Search(props) {
+  const { setIsLoading, handleQuery } = props;
   const [category, setCategory] = useState({});
-
+  const history = useHistory();
+  const location = useLocation();
+  const parts = location.search.split("&");
+  const parts2 = `${parts[0]}`.split("=");
+  const match = useRouteMatch({
+    path: "/",
+    strict: true,
+    sensitive: true,
+  });
   const changeCategory = (category) => {
-    console.log(category);
-    props.setIsLoading(true);
+    setIsLoading(true);
     setCategory(category);
   };
-  const [query, setQuery] = useState("");
+  const [queryInput, setQueryInput] = useState("");
+
   const onChange = (e) => {
-    setQuery(e.target.value);
+    setQueryInput(e.target.value);
+    history.push({
+      pathname: location.pathname,
+      search: "?query=" + e.target.value,
+    });
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    props.setIsLoading(true);
-    props.handleQuery(query);
+    setIsLoading(true);
+    handleQuery(queryInput);
+    fetchMovies(queryInput);
+    if (!match.isExact) {
+      history.push("/");
+    }
   };
 
-  useEffect(fetchMovies, [props.isLoading, category]);
-  function fetchMovies() {
-    if (!props.isLoading) return;
+  useEffect(fetchMovies, [category]);
+  useEffect(() => {
+    if (location.search != "") {
+      fetchMovies(parts2[1]);
+      setQueryInput(parts2[1]);
+    } else {
+      fetchMovies();
+    }
+  }, []);
+
+  function fetchMovies(queryInput = "") {
     let SEARCH_URL;
-    if (query !== "") {
-      SEARCH_URL = constructUrl("search/movie", query);
+    if (queryInput !== "") {
+      SEARCH_URL = constructUrl("search/movie", queryInput);
     } else {
       SEARCH_URL = constructUrl("movie/popular");
     }
     fetch(SEARCH_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.results !== undefined) {
           let movies = data.results;
-          console.log(movies);
           if (category.id) {
-            movies = movies.filter((movie) =>
-              movie.genre_ids.includes(category.id)
-            );
-            console.log(movies);
+            movies = movies.filter((movie) => {
+              return movie.genre_ids.includes(category.id);
+            });
           }
           props.handleMovies(movies);
         }
       })
+
       .catch((err) => console.log(err));
   }
 
@@ -62,7 +85,11 @@ export default function Search(props) {
       <Button variant="outline-light" type="submit">
         Search
         <span>
-          <Spinners isLoading={props.isLoading} />
+          {props.isLoading ? (
+            <Spinner animation="border" variant="warning" size="sm" />
+          ) : (
+            " "
+          )}
         </span>
       </Button>
     </Form>
