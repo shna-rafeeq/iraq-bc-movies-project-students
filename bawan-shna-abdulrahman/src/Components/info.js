@@ -37,7 +37,7 @@ export default function Info(props) {
           <Image
             style={{
               float: "right",
-              height: "60%",
+              maxHeight: "500px",
             }}
             src={`https://image.tmdb.org/t/p/original${person.profile_path}`}
           ></Image>
