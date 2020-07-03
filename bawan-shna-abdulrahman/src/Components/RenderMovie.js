@@ -44,7 +44,11 @@ export default function RenderMovie(props) {
           </Card.Body>
         </Card>
       </Link>
-      <Button variant="warning" onClick={toogle} style={{ marginLeft: "35%" }}>
+      <Button
+        variant="warning"
+        onClick={toogle}
+        style={{ marginLeft: "35%", marginBottom: "5px" }}
+      >
         Overview
       </Button>
 

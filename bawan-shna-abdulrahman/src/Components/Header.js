@@ -2,6 +2,8 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import Search from "./Search";
 import { Link } from "react-router-dom";
+import { faFilm } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Header(props) {
   const { handleQuery, handleMovies, isLoading, setIsLoading } = props;
@@ -16,7 +18,10 @@ export default function Header(props) {
             textDecoration: "none",
           }}
         >
-          React app
+          <FontAwesomeIcon
+            icon={faFilm}
+            style={{ fontSize: "25px", color: "#FFC107" }}
+          />
         </Link>
         <Navbar.Toggle aria-controls="basic-Navbar-nav" />
         <Navbar.Collapse id="basic-Navbar-nav">
