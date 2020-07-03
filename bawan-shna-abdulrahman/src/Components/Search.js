@@ -35,12 +35,13 @@ export default function Search(props) {
     event.preventDefault();
     setIsLoading(true);
     handleQuery(queryInput);
+    fetchMovies(queryInput);
     if (!match.isExact) {
       history.push("/");
     }
   };
 
-  useEffect(() => fetchMovies(queryInput), [props.isLoading, category]);
+  useEffect(() => fetchMovies, [category]);
   useEffect(() => {
     if (location.search != "") {
       fetchMovies(parts2[1]);
@@ -48,11 +49,11 @@ export default function Search(props) {
     }
   }, []);
 
-  function fetchMovies(query) {
-    if (!props.isLoading) return;
+  function fetchMovies(queryInput) {
+    // if (!props.isLoading) return;
     let SEARCH_URL;
-    if (query !== "") {
-      SEARCH_URL = constructUrl("search/movie", query);
+    if (queryInput !== "") {
+      SEARCH_URL = constructUrl("search/movie", queryInput);
     } else {
       SEARCH_URL = constructUrl("movie/popular");
     }
