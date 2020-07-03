@@ -3,6 +3,9 @@ import { constructUrl } from "./Api";
 import { Image } from "react-bootstrap";
 
 export default function Info(props) {
+  const nullPhoto =
+    "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
+
   const [person, setPerson] = useState({});
   let PERSON_ID = props.match.params.id;
   let SEARCH_URL;
@@ -16,7 +19,7 @@ export default function Info(props) {
         setPerson(data);
       });
   }, [PERSON_ID]);
-  console.log(person);
+  let Photo = `https://image.tmdb.org/t/p/original${person.profile_path}`;
   return (
     <>
       <div
@@ -42,7 +45,11 @@ export default function Info(props) {
               marginBottom: "5px",
               borderRadius: "30px",
             }}
-            src={`https://image.tmdb.org/t/p/original${person.profile_path}`}
+            src={
+              Photo !== "https://image.tmdb.org/t/p/originalnull"
+                ? Photo
+                : nullPhoto
+            }
           ></Image>
           <p>Name: {person.name}</p>
           <p> known_for_department: {person.known_for_department}</p>
