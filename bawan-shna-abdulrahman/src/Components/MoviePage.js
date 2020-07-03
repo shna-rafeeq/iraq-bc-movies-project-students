@@ -64,7 +64,8 @@ export default function MoviePage(props) {
   return (
     <>
       <Row>
-        <div
+        <Col
+          lg={12}
           style={{
             backgroundImage: `url(${
               movieItem.backdrop_path !== null
@@ -81,7 +82,7 @@ export default function MoviePage(props) {
             left: 0,
             zIndex: 1,
           }}
-        ></div>
+        ></Col>
         <div
           style={{
             position: "absolute",
@@ -95,15 +96,17 @@ export default function MoviePage(props) {
             left: 0,
           }}
         ></div>
-        <Col
-          lg={12}
-          style={{ zIndex: 200, position: "absolute", bottom: "20%" }}
-        >
+        <Col lg={12} sm={12} style={{ zIndex: 200 }}>
           {movieItem.genres
             ? movieItem.genres.map((genre) => {
                 return (
                   <Badge
-                    style={{ marginRight: "20px", marginLeft: "10px" }}
+                    style={{
+                      marginTop: "10px",
+                      marginRight: "20px",
+                      marginLeft: "10px",
+                      padding: "10px",
+                    }}
                     variant="warning"
                   >
                     {genre.name}
@@ -113,7 +116,9 @@ export default function MoviePage(props) {
             : null}
         </Col>
         <Col
-          lg={12}
+          lg={3}
+          md={3}
+          sm={12}
           style={{
             zIndex: 200,
             fontSize: "40px",
@@ -121,13 +126,11 @@ export default function MoviePage(props) {
             color: "rgb(102, 84, 23)",
           }}
         >
-          Actors:
+          <p style={{ marginLeft: "10px" }}>Actors:</p>
           <ol
             style={{
-              width: "300px",
               height: "50vh",
               overflowY: "scroll",
-              position: "absolute",
             }}
           >
             {actors.map((v) => {
@@ -140,7 +143,7 @@ export default function MoviePage(props) {
           </ol>
         </Col>
 
-        <Col lg={{ span: 6, offset: 3 }}>
+        <Col lg={{ span: 8 }} sm={12} style={{ marginTop: "60px" }}>
           <Carousel style={{ zIndex: 3 }}>
             {trailers.map((v, i) => {
               return (
