@@ -6,13 +6,14 @@ import { constructUrl } from "./Api";
 
 export default function Search(props) {
   const { setIsLoading, handleQuery } = props;
+  const [queryInput, setQueryInput] = useState("");
   const [category, setCategory] = useState({});
   const history = useHistory();
   const location = useLocation();
   const parts = location.search.split("&");
   const parts2 = `${parts[0]}`.split("=");
   const match = useRouteMatch({
-    path: "/",
+    path: `/`,
     strict: true,
     sensitive: true,
   });
@@ -20,7 +21,6 @@ export default function Search(props) {
     setIsLoading(true);
     setCategory(category);
   };
-  const [queryInput, setQueryInput] = useState("");
 
   const onChange = (e) => {
     setQueryInput(e.target.value);
@@ -35,7 +35,10 @@ export default function Search(props) {
     handleQuery(queryInput);
     fetchMovies(queryInput);
     if (!match.isExact) {
-      history.push("/");
+      history.push({
+        pathname: "/",
+        search: "?query=" + queryInput,
+      });
     }
   };
 
