@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { constructUrl } from "./Api";
 import { Link } from "react-router-dom";
+import "./actorsLink.css";
 import {
   Card,
   Badge,
@@ -94,16 +95,10 @@ export default function MoviePage(props) {
             left: 0,
           }}
         ></div>
-        <Col lg={12} style={{ zIndex: 200 }}>
-          {actors.map((v) => {
-            return (
-              <Link to={`/person/${v.id}`}>
-                <p>{v.name}</p>
-              </Link>
-            );
-          })}
-        </Col>
-        <Col lg={12} style={{ zIndex: 200 }}>
+        <Col
+          lg={12}
+          style={{ zIndex: 200, position: "absolute", bottom: "20%" }}
+        >
           {movieItem.genres
             ? movieItem.genres.map((genre) => {
                 return (
@@ -117,6 +112,34 @@ export default function MoviePage(props) {
               })
             : null}
         </Col>
+        <Col
+          lg={12}
+          style={{
+            zIndex: 200,
+            fontSize: "40px",
+            fontWeight: "bold",
+            color: "rgb(102, 84, 23)",
+          }}
+        >
+          Actors:
+          <ol
+            style={{
+              width: "300px",
+              height: "50vh",
+              overflowY: "scroll",
+              position: "absolute",
+            }}
+          >
+            {actors.map((v) => {
+              return (
+                <Link className="actors-link" to={`/person/${v.id}`}>
+                  <li>{v.name}</li>
+                </Link>
+              );
+            })}
+          </ol>
+        </Col>
+
         <Col lg={{ span: 6, offset: 3 }}>
           <Carousel style={{ zIndex: 3 }}>
             {trailers.map((v, i) => {
@@ -128,7 +151,8 @@ export default function MoviePage(props) {
             })}
           </Carousel>
         </Col>
-        <Col lg={12} style={{ zIndex: 200 }}>
+
+        {/* <Col lg={12} style={{ zIndex: 200 }}>
           <Link
             to="/"
             style={{
@@ -143,7 +167,7 @@ export default function MoviePage(props) {
           >
             Back
           </Link>
-        </Col>
+        </Col> */}
       </Row>
     </>
   );

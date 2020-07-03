@@ -33,6 +33,9 @@ export default function App(props) {
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
+          <Route path="/iraq-bc-movies-project-students">
+            <Redirect to="/"> </Redirect>
+          </Route>
 
           <Route path="/movie/:id" component={MoviePage} />
           <Route path="/person/:id" component={Info} />

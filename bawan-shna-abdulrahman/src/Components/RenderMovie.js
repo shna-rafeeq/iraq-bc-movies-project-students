@@ -17,6 +17,7 @@ export default function RenderMovie(props) {
           style={{
             width: "300px",
             margin: "20px",
+            transition: "width 2s",
           }}
         >
           <Card.Img

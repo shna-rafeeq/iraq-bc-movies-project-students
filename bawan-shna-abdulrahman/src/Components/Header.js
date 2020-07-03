@@ -4,6 +4,7 @@ import Search from "./Search";
 import { Link } from "react-router-dom";
 
 export default function Header(props) {
+  const { handleQuery, handleMovies, isLoading, setIsLoading } = props;
   return (
     <div>
       <Navbar bg="dark" expand="lg" style={{ zIndex: 1000 }}>
@@ -25,10 +26,10 @@ export default function Header(props) {
             </Link>
           </Nav>
           <Search
-            handleQuery={props.handleQuery}
-            handleMovies={props.handleMovies}
-            isLoading={props.isLoading}
-            setIsLoading={props.setIsLoading}
+            handleQuery={handleQuery}
+            handleMovies={handleMovies}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         </Navbar.Collapse>
       </Navbar>

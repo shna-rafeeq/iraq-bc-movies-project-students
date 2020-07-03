@@ -6,6 +6,7 @@ import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
 
 export default function Search(props) {
+  const { setIsLoading, handleQuery } = props;
   const [category, setCategory] = useState({});
   const history = useHistory();
   const location = useLocation();
@@ -18,13 +19,13 @@ export default function Search(props) {
     sensitive: true,
   });
   const changeCategory = (category) => {
-    props.setIsLoading(true);
+    setIsLoading(true);
     setCategory(category);
   };
-  const [query, setQuery] = useState("");
+  const [queryInput, setQueryInput] = useState("");
 
   const onChange = (e) => {
-    setQuery(e.target.value);
+    setQueryInput(e.target.value);
     history.push({
       pathname: location.pathname,
       search: "?query=" + e.target.value,
@@ -32,18 +33,18 @@ export default function Search(props) {
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    props.setIsLoading(true);
-    props.handleQuery(query);
+    setIsLoading(true);
+    handleQuery(queryInput);
     if (!match.isExact) {
       history.push("/");
     }
   };
 
-  useEffect(() => fetchMovies(query), [props.isLoading, category]);
+  useEffect(() => fetchMovies(queryInput), [props.isLoading, category]);
   useEffect(() => {
     if (location.search != "") {
       fetchMovies(parts2[1]);
-      setQuery(parts2[1]);
+      setQueryInput(parts2[1]);
     }
   }, []);
 
