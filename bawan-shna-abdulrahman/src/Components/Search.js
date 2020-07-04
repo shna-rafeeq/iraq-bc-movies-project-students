@@ -24,7 +24,7 @@ export default function Search(props) {
   };
 
   useEffect(fetchMovies, [category]);
-
+  // useless comment
   function fetchMovies() {
     let SEARCH_URL;
     if (queryInput !== "") {
