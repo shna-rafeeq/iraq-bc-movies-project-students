@@ -4,7 +4,7 @@ import { Image } from "react-bootstrap";
 
 export default function Info(props) {
   const nullPhoto =
-    "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
+    "https://bitsofco.de/content/images/2018/12/Screenshot-2018-12-16-at-21.06.29.png";
 
   const [person, setPerson] = useState({});
   let PERSON_ID = props.match.params.id;

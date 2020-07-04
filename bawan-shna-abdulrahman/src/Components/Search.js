@@ -77,7 +77,7 @@ export default function Search(props) {
   }
 
   return (
-    <Form inline onSubmit={onSubmit}>
+    <Form inline onSubmit={onSubmit} style={{ flexFlow: "row" }}>
       <DropdownCategories category={category} setCategory={changeCategory} />
       <FormControl
         type="text"

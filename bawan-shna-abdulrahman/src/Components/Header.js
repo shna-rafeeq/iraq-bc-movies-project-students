@@ -26,9 +26,15 @@ export default function Header(props) {
         <Navbar.Toggle aria-controls="basic-Navbar-nav" />
         <Navbar.Collapse id="basic-Navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+            {/* <Link
+              to="/"
+              style={{
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
               Home
-            </Link>
+            </Link> */}
           </Nav>
           <Search
             handleQuery={handleQuery}
