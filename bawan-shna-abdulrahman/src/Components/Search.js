@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
-import Spinners from "./Spinner";
+import { Button, Form, FormControl, Spinner } from "react-bootstrap";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
 
 export default function Search(props) {
+  const { setIsLoading, handleQuery } = props;
   const [category, setCategory] = useState({});
 
   const changeCategory = (category) => {
-    console.log(category);
-    props.setIsLoading(true);
+    setIsLoading(true);
     setCategory(category);
   };
-  const [query, setQuery] = useState("");
+  const [queryInput, setQueryInput] = useState("");
+
   const onChange = (e) => {
-    setQuery(e.target.value);
+    setQueryInput(e.target.value);
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    props.setIsLoading(true);
-    props.handleQuery(query);
+    setIsLoading(true);
+    handleQuery(queryInput);
+    fetchMovies();
   };
 
-  useEffect(fetchMovies, [props.isLoading, category]);
+  useEffect(fetchMovies, [category]);
+  // useless comment
   function fetchMovies() {
-    if (!props.isLoading) return;
     let SEARCH_URL;
-    if (query !== "") {
-      SEARCH_URL = constructUrl("search/movie", query);
+    if (queryInput !== "") {
+      SEARCH_URL = constructUrl("search/movie", queryInput);
     } else {
       SEARCH_URL = constructUrl("movie/popular");
     }
@@ -35,9 +36,9 @@ export default function Search(props) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.results !== undefined) {
+        if (Boolean(data.results)) {
           let movies = data.results;
-          console.log(movies);
+
           if (category.id) {
             movies = movies.filter((movie) =>
               movie.genre_ids.includes(category.id)
@@ -62,7 +63,11 @@ export default function Search(props) {
       <Button variant="outline-light" type="submit">
         Search
         <span>
-          <Spinners isLoading={props.isLoading} />
+          {props.isLoading ? (
+            <Spinner animation="border" variant="warning" size="sm" />
+          ) : (
+            " "
+          )}
         </span>
       </Button>
     </Form>

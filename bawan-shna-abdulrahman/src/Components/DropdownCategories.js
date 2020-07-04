@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { constructUrl } from "./Api";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
 export default function DropdownCategories(props) {
-  const SEARCH_URL_CATEGORIES = constructUrl("genre/movie/list", "");
+  const SEARCH_URL_CATEGORIES = constructUrl("genre/movie/list");
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     fetch(SEARCH_URL_CATEGORIES)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if (data.genres !== undefined)
+        if (Boolean(data.genres))
           setCategories([{ id: 0, name: "All" }, ...data.genres]);
       })
       .catch((err) => console.log(err));
-  }, [SEARCH_URL_CATEGORIES]);
+  }, []);
 
   return (
     <>
