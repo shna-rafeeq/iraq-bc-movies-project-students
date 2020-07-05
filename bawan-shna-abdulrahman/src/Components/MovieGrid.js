@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import RenderMovie from "./RenderMovie";
 import { Container, Row } from "react-bootstrap";
+import { StateContext } from "./StateProvider";
 
-export default function MoviesGrid(props) {
-  const movies = props.movies;
+export default function MoviesGrid() {
+  const [state, dispatch] = useContext(StateContext);
+  // const movies = props.movies;
   return (
     <Container>
       <Row className="justify-content-center">
-        {movies.length > 0 &&
-          movies.map((movie) => (
+        {state.movies.length > 0 &&
+          state.movies.map((movie) => (
             <RenderMovie
               overview={movie.overview}
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}

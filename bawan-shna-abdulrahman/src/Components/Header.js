@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Header(props) {
-  const { handleQuery, handleMovies, isLoading, setIsLoading } = props;
+export default function Header() {
   return (
     <div>
       <Navbar bg="dark" expand="lg" style={{ zIndex: 1000 }}>
@@ -36,12 +35,7 @@ export default function Header(props) {
               Home
             </Link> */}
           </Nav>
-          <Search
-            handleQuery={handleQuery}
-            handleMovies={handleMovies}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-          />
+          <Search />
         </Navbar.Collapse>
       </Navbar>
     </div>

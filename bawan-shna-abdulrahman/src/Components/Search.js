@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Form, FormControl, Spinner } from "react-bootstrap";
 import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
+import { StateContext } from "./StateProvider";
 
 export default function Search(props) {
-  const { setIsLoading, handleQuery } = props;
+  const [state, dispatch] = useContext(StateContext);
+
   const [queryInput, setQueryInput] = useState("");
   const [category, setCategory] = useState({});
   const history = useHistory();
@@ -18,7 +20,7 @@ export default function Search(props) {
     sensitive: true,
   });
   const changeCategory = (category) => {
-    setIsLoading(true);
+    dispatch({ type: "SET_ISLOADING", payload: true });
     setCategory(category);
   };
 
@@ -31,8 +33,10 @@ export default function Search(props) {
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    handleQuery(queryInput);
+    // setIsLoading(true);
+    dispatch({ type: "SET_ISLOADING", payload: true });
+    // handleQuery(queryInput);
+    dispatch({ type: "SET_QUERY", payload: queryInput });
     fetchMovies(queryInput);
     if (!match.isExact) {
       history.push({
@@ -69,7 +73,8 @@ export default function Search(props) {
               return movie.genre_ids.includes(category.id);
             });
           }
-          props.handleMovies(movies);
+          dispatch({ type: "SET_MOVIES", payload: movies });
+          dispatch({ type: "SET_ISLOADING", payload: false });
         }
       })
 
@@ -88,7 +93,7 @@ export default function Search(props) {
       <Button variant="outline-light" type="submit">
         Search
         <span>
-          {props.isLoading ? (
+          {state.isLoading ? (
             <Spinner animation="border" variant="warning" size="sm" />
           ) : (
             " "
