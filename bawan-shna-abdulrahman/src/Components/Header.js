@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import { Navbar, Nav } from "react-bootstrap";
 import Search from "./Search";
 import { Link } from "react-router-dom";
@@ -25,15 +26,10 @@ export default function Header() {
         <Navbar.Toggle aria-controls="basic-Navbar-nav" />
         <Navbar.Collapse id="basic-Navbar-nav">
           <Nav className="mr-auto">
-            {/* <Link
-              to="/"
-              style={{
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
+            {/* <a href="/">Home</a> */}
+            <Nav.Link href="/" style={{ color: "white" }}>
               Home
-            </Link> */}
+            </Nav.Link>
           </Nav>
           <Search />
         </Navbar.Collapse>

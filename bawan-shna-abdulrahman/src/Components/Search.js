@@ -5,7 +5,7 @@ import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
 import { StateContext } from "./StateProvider";
 
-export default function Search(props) {
+export default function Search() {
   const [state, dispatch] = useContext(StateContext);
 
   const [queryInput, setQueryInput] = useState("");
@@ -31,12 +31,15 @@ export default function Search(props) {
       search: "?query=" + e.target.value,
     });
   };
+  // const test = () => {
+  //   setQueryInput("");
+  //   dispatch({ type: "SET_QUERY", payload: queryInput });
+  // };
   const onSubmit = (event) => {
     event.preventDefault();
-    // setIsLoading(true);
     dispatch({ type: "SET_ISLOADING", payload: true });
-    // handleQuery(queryInput);
     dispatch({ type: "SET_QUERY", payload: queryInput });
+
     fetchMovies(queryInput);
     if (!match.isExact) {
       history.push({
@@ -46,7 +49,7 @@ export default function Search(props) {
     }
   };
 
-  useEffect(fetchMovies, [category]);
+  useEffect(() => fetchMovies(queryInput), [category]);
   useEffect(() => {
     if (location.search != "") {
       fetchMovies(parts2[1]);
@@ -90,7 +93,7 @@ export default function Search(props) {
         className="mr-sm-2"
         onChange={onChange}
       />
-      <Button variant="outline-light" type="submit">
+      <Button variant="outline-warning" type="submit">
         Search
         <span>
           {state.isLoading ? (

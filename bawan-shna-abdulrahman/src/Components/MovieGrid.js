@@ -5,7 +5,7 @@ import { StateContext } from "./StateProvider";
 
 export default function MoviesGrid() {
   const [state, dispatch] = useContext(StateContext);
-  // const movies = props.movies;
+
   return (
     <Container>
       <Row className="justify-content-center">

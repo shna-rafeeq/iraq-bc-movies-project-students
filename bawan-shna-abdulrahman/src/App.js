@@ -7,7 +7,7 @@ import Footer from "./Components/Footer";
 import MoviePage from "./Components/MoviePage";
 import Info from "./Components/info";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { StateProvider, StateContext } from "./Components/StateProvider";
+import { StateProvider } from "./Components/StateProvider";
 
 export default function App() {
   return (

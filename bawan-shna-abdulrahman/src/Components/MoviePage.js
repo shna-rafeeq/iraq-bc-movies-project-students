@@ -121,12 +121,18 @@ export default function MoviePage(props) {
           sm={12}
           style={{
             zIndex: 200,
-            fontSize: "40px",
-            fontWeight: "bold",
-            color: "rgb(102, 84, 23)",
           }}
         >
-          <p style={{ marginLeft: "10px" }}>Actors:</p>
+          <p
+            style={{
+              marginLeft: "10px",
+              fontSize: "40px",
+              fontWeight: "bold",
+              color: "#ece4c9",
+            }}
+          >
+            Actors:
+          </p>
           <ol
             style={{
               height: "50vh",
@@ -159,10 +165,12 @@ export default function MoviePage(props) {
           <Link
             to="/"
             style={{
-              marginLeft: "50%",
+              marginTop: "10px",
+              marginRight: "20px",
+              marginLeft: "10px",
+              padding: "10px",
               textDecoration: "none",
               color: "black",
-              padding: "5px",
               backgroundColor: " #ffc107",
               borderRadius: "0.25rem",
               borderColor: "#ffc107",
