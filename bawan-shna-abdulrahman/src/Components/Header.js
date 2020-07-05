@@ -10,8 +10,8 @@ export default function Header() {
   return (
     <div>
       <Navbar bg="dark" expand="lg" style={{ zIndex: 1000 }}>
-        <Link
-          to="/"
+        <Nav.Link
+          href="/"
           style={{
             marginRight: "20px",
             color: "white",
@@ -22,11 +22,10 @@ export default function Header() {
             icon={faFilm}
             style={{ fontSize: "25px", color: "#FFC107" }}
           />
-        </Link>
+        </Nav.Link>
         <Navbar.Toggle aria-controls="basic-Navbar-nav" />
         <Navbar.Collapse id="basic-Navbar-nav">
           <Nav className="mr-auto">
-            {/* <a href="/">Home</a> */}
             <Nav.Link href="/" style={{ color: "white" }}>
               Home
             </Nav.Link>
