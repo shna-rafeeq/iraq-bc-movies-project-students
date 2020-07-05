@@ -31,10 +31,7 @@ export default function Search() {
       search: "?query=" + e.target.value,
     });
   };
-  // const test = () => {
-  //   setQueryInput("");
-  //   dispatch({ type: "SET_QUERY", payload: queryInput });
-  // };
+
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch({ type: "SET_ISLOADING", payload: true });
