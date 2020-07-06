@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { constructUrl } from "./Api";
 import { Link } from "react-router-dom";
-import "./actorsLink.css";
+import "./moviePage.css";
 import {
   Card,
   Badge,
@@ -69,8 +69,7 @@ export default function MoviePage(props) {
           style={{
             backgroundImage: `url(${
               movieItem.backdrop_path !== null
-                ? "https://image.tmdb.org/t/p/original" +
-                  movieItem.backdrop_path
+                ? `https://image.tmdb.org/t/p/original${movieItem.backdrop_path}`
                 : nullPhoto
             })`,
             height: "100vh",
@@ -83,56 +82,21 @@ export default function MoviePage(props) {
             zIndex: 1,
           }}
         ></Col>
-        <div
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            zIndex: 2,
-            background:
-              "linear-gradient(rgba(4, 4, 4, 0.9) 0%, rgba(255, 255, 255, 0) 95%)",
-            top: 0,
-            right: 0,
-            left: 0,
-          }}
-        ></div>
-        <Col lg={12} sm={12} style={{ zIndex: 200 }}>
+        <div className="grdaient"></div>
+        <Col lg={12} sm={12} className="badgeCol">
           {movieItem.genres
             ? movieItem.genres.map((genre) => {
                 return (
-                  <Badge
-                    style={{
-                      marginTop: "10px",
-                      marginRight: "20px",
-                      marginLeft: "10px",
-                      padding: "10px",
-                    }}
-                    variant="warning"
-                  >
+                  <Badge className="Badge" variant="warning">
                     {genre.name}
                   </Badge>
                 );
               })
             : null}
         </Col>
-        <Col
-          lg={3}
-          md={3}
-          sm={12}
-          style={{
-            zIndex: 200,
-            fontSize: "40px",
-            fontWeight: "bold",
-            color: "rgb(102, 84, 23)",
-          }}
-        >
-          <p style={{ marginLeft: "10px" }}>Actors:</p>
-          <ol
-            style={{
-              height: "50vh",
-              overflowY: "scroll",
-            }}
-          >
+        <Col className="ActorsCol" lg={3} md={3} sm={12}>
+          <p className="ActorsP">Actors:</p>
+          <ol className="ActorsList">
             {actors.map((v) => {
               return (
                 <Link className="actors-link" to={`/person/${v.id}`}>
@@ -143,8 +107,8 @@ export default function MoviePage(props) {
           </ol>
         </Col>
 
-        <Col lg={{ span: 8 }} sm={12} style={{ marginTop: "60px" }}>
-          <Carousel style={{ zIndex: 3 }}>
+        <Col lg={{ span: 8 }} sm={12} className="CarouselCol">
+          <Carousel className="Carousel" style={{ zIndex: 3 }}>
             {trailers.map((v, i) => {
               return (
                 <Carousel.Item>
@@ -154,23 +118,6 @@ export default function MoviePage(props) {
             })}
           </Carousel>
         </Col>
-
-        {/* <Col lg={12} style={{ zIndex: 200 }}>
-          <Link
-            to="/"
-            style={{
-              marginLeft: "50%",
-              textDecoration: "none",
-              color: "black",
-              padding: "5px",
-              backgroundColor: " #ffc107",
-              borderRadius: "0.25rem",
-              borderColor: "#ffc107",
-            }}
-          >
-            Back
-          </Link>
-        </Col> */}
       </Row>
     </>
   );

@@ -9,7 +9,6 @@ export default function Info(props) {
   const [person, setPerson] = useState({});
   let PERSON_ID = props.match.params.id;
   let SEARCH_URL;
-  console.log(props.match.params.id);
 
   useEffect(() => {
     SEARCH_URL = constructUrl(`person/${PERSON_ID}`);

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Form, FormControl, Spinner } from "react-bootstrap";
 import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
+import { StateContext } from "./StateProvider";
 
-export default function Search(props) {
-  const { setIsLoading, handleQuery } = props;
+export default function Search() {
+  const [state, dispatch] = useContext(StateContext);
+
   const [queryInput, setQueryInput] = useState("");
   const [category, setCategory] = useState({});
   const history = useHistory();
@@ -18,8 +20,11 @@ export default function Search(props) {
     sensitive: true,
   });
   const changeCategory = (category) => {
-    setIsLoading(true);
+    dispatch({ type: "SET_ISLOADING", payload: true });
     setCategory(category);
+    // if (category.id == 0) {
+    //   setQueryInput("");
+    // }
   };
 
   const onChange = (e) => {
@@ -29,10 +34,12 @@ export default function Search(props) {
       search: "?query=" + e.target.value,
     });
   };
+
   const onSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    handleQuery(queryInput);
+    dispatch({ type: "SET_ISLOADING", payload: true });
+    dispatch({ type: "SET_QUERY", payload: queryInput });
+
     fetchMovies(queryInput);
     if (!match.isExact) {
       history.push({
@@ -42,7 +49,7 @@ export default function Search(props) {
     }
   };
 
-  useEffect(fetchMovies, [category]);
+  useEffect(() => fetchMovies(queryInput), [category]);
   useEffect(() => {
     if (location.search != "") {
       fetchMovies(parts2[1]);
@@ -69,7 +76,8 @@ export default function Search(props) {
               return movie.genre_ids.includes(category.id);
             });
           }
-          props.handleMovies(movies);
+          dispatch({ type: "SET_MOVIES", payload: movies });
+          dispatch({ type: "SET_ISLOADING", payload: false });
         }
       })
 
@@ -85,10 +93,10 @@ export default function Search(props) {
         className="mr-sm-2"
         onChange={onChange}
       />
-      <Button variant="outline-light" type="submit">
+      <Button variant="outline-warning" type="submit">
         Search
         <span>
-          {props.isLoading ? (
+          {state.isLoading ? (
             <Spinner animation="border" variant="warning" size="sm" />
           ) : (
             " "
