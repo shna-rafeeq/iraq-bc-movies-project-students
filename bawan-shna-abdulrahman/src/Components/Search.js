@@ -3,10 +3,17 @@ import { Button, Form, FormControl, Spinner } from "react-bootstrap";
 import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
 import DropdownCategories from "./DropdownCategories";
 import { constructUrl } from "./Api";
-import { StateContext } from "./StateProvider";
+// import { StateContext } from "./StateProvider";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Search() {
-  const [state, dispatch] = useContext(StateContext);
+  // const [state, dispatch] = useContext(StateContext);
+  const movies = useSelector((state) => state.movies);
+  const query = useSelector((state) => state.query);
+  const isLoading = useSelector((state) => {
+    return state.isLoading;
+  });
+  const dispatch = useDispatch();
 
   const [queryInput, setQueryInput] = useState("");
   const [category, setCategory] = useState({});
@@ -96,7 +103,7 @@ export default function Search() {
       <Button variant="outline-warning" type="submit">
         Search
         <span>
-          {state.isLoading ? (
+          {isLoading ? (
             <Spinner animation="border" variant="warning" size="sm" />
           ) : (
             " "
