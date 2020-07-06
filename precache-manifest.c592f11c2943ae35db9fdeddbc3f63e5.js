@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f785b443286e97744d67adc050f91216",
+    "revision": "e6b023516381d85ba7c8e7042bfa092c",
     "url": "/iraq-bc-movies-project-students/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/iraq-bc-movies-project-students/static/css/2.829c9cb5.chunk.css"
   },
   {
-    "revision": "71612da93a8add84665f",
+    "revision": "ccc81b4bd79a2ff4fdd5",
     "url": "/iraq-bc-movies-project-students/static/css/main.d863eaa9.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/iraq-bc-movies-project-students/static/js/2.9ee5b45f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "71612da93a8add84665f",
-    "url": "/iraq-bc-movies-project-students/static/js/main.815c6d41.chunk.js"
+    "revision": "ccc81b4bd79a2ff4fdd5",
+    "url": "/iraq-bc-movies-project-students/static/js/main.9d4bc7d8.chunk.js"
   },
   {
     "revision": "0cffc370982293cdd7e0",
