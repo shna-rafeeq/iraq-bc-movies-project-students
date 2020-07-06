@@ -22,9 +22,9 @@ export default function Search() {
   const changeCategory = (category) => {
     dispatch({ type: "SET_ISLOADING", payload: true });
     setCategory(category);
-    if (category.id == 0) {
-      setQueryInput("");
-    }
+    // if (category.id == 0) {
+    //   setQueryInput("");
+    // }
   };
 
   const onChange = (e) => {
